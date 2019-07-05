@@ -8,7 +8,14 @@ import pytest
 
 from fastdiff import compare
 from fastdiff._base import compare as compare_base
-from fastdiff._native import compare as compare_native, initiate_instance
+try:
+    from fastdiff._native import compare as compare_native, initiate_instance
+except:
+    def compare_native(a, b):
+        return []
+
+    def initiate_instance():
+        pass
 
 
 def test_content():
