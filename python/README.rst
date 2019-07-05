@@ -20,22 +20,23 @@ fastdiff
 
 
 
-A fast/native implementation of diff algorithms
-
+A fast/native implementation of diff algorithms using WebAssembly and Wasmer_.
 
 * Free software: MIT license
-* Documentation: https://fastdiff.readthedocs.io.
 
 
 Features
 --------
 
-* TODO
+* Uses WebAssembly to achieve 75x speedup in the compare algorithm
+* Compatible with any platform
+
 
 Credits
 -------
 
 This package was created with Cookiecutter_ and the `audreyr/cookiecutter-pypackage`_ project template.
 
+.. _Wasmer: https://pypi.org/project/wasmer/
 .. _Cookiecutter: https://github.com/audreyr/cookiecutter
 .. _`audreyr/cookiecutter-pypackage`: https://github.com/audreyr/cookiecutter-pypackage

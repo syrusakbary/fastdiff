@@ -54,7 +54,7 @@ lint: ## check style with flake8
 	flake8 fastdiff tests
 
 test: ## run tests quickly with the default Python
-	py.test
+	py.test -s --benchmark-skip
 
 test-all: ## run tests on every Python version with tox
 	tox
@@ -86,3 +86,6 @@ dist: clean ## builds source and wheel package
 
 install: clean ## install the package to the active Python's site-packages
 	python setup.py install
+
+upload: dist ## Uploads the package using twine
+	twine upload dist/*
