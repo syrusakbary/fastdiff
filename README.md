@@ -1,8 +1,28 @@
-# Fastdiff
+# fastdiff
 
-Fastdiff is a re-implementation of difflib in pure Rust compiled to WebAssembly to speedup different language integrations:
+`fastdiff` is a re-implementation of difflib in pure Rust compiled to WebAssembly to speedup different language integrations:
 
-* Python: via [Wasmer](https://github.com/wasmerio/python-ext-wasm), falling back to `difflib` [compare](https://docs.python.org/3/library/difflib.html#difflib.Differ.compare).
+* [Python](https://github.com/syrusakbary/fastdiff/tree/master/python): via [Wasmer](https://github.com/wasmerio/python-ext-wasm), falling back to `difflib` [compare](https://docs.python.org/3/library/difflib.html#difflib.Differ.compare).
+
+
+## Install
+
+### Python
+To install `fastdiff` in Python, you just need to do:
+
+```shell
+pip install fastdiff
+```
+
+And then, use it in Python like this:
+```python
+from fastdiff import compare
+
+str1 = 'hello\nwasm\n'
+str2 = 'hello\npython\n'
+
+print(compare(str1, str2))
+```
 
 ## Benchmarks
 
