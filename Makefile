@@ -21,3 +21,7 @@ all: build optimize test_python
 
 python: build optimize
 	cp fastdiff.wasm python/fastdiff/
+
+publish:
+	cd python && python setup.py sdist bdist_wheel
+	cd python && python setup.py sdist upload
