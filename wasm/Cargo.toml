@@ -1,6 +1,6 @@
 [package]
-name = "wasm"
-version = "0.1.0"
+name = "fastdiff"
+version = "0.1.2"
 authors = ["Syrus <me@syrusakbary.com>"]
 edition = "2018"
 

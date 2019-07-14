@@ -57,6 +57,7 @@ def get_cstr(pointer, instance):
 
 def compare(first, second):
     instance = get_instance()
+
     # Allocate memory for the subject, and get a pointer to it.
     first_pointer, first_length = allocate_cstr(first, instance)
     second_pointer, second_length = allocate_cstr(second, instance)
@@ -64,12 +65,13 @@ def compare(first, second):
     output_pointer = instance.exports.compare(first_pointer, second_pointer)
 
     output_bytes = bytes(get_cstr(output_pointer, instance))
-    return output_bytes.decode().splitlines()
 
-    # Deallocate the subject, and the output.
+    # Deallocate
     instance.exports.deallocate(first_pointer, first_length)
     instance.exports.deallocate(second_pointer, second_length)
-    instance.exports.deallocate(output_pointer, length_of_output)
+    instance.exports.deallocate(output_pointer, len(output_bytes))
+
+    return output_bytes.decode().splitlines()
 
 
 _instance = get_instance()

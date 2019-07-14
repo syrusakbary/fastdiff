@@ -1,7 +1,7 @@
 
 build:
 	cargo build --manifest-path wasm/Cargo.toml --release --target=wasm32-unknown-unknown
-	cp wasm/target/wasm32-unknown-unknown/release/wasm.wasm fastdiff.wasm
+	cp wasm/target/wasm32-unknown-unknown/release/fastdiff.wasm fastdiff.wasm
 
 optimize:
 	wasm-strip fastdiff.wasm

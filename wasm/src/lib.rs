@@ -1,26 +1,45 @@
 use std::ffi::{CStr, CString};
 use std::mem;
+use std::alloc::{alloc, dealloc, realloc, Layout};
 use std::os::raw::{c_char, c_void};
 use difflib::differ::Differ;
 
 #[no_mangle]
-pub extern fn allocate(size: usize) -> *mut c_void {
-    let mut buffer = Vec::with_capacity(size+1);
-    let pointer = buffer.as_mut_ptr();
-    mem::forget(buffer);
-
-    pointer as *mut c_void
+pub unsafe extern fn allocate(size: usize) -> *mut u8 {
+    let align = mem::align_of::<usize>();
+    if let Ok(layout) = Layout::from_size_align(size, align) {
+        unsafe {
+            if layout.size() > 0 {
+                let ptr = alloc(layout);
+                if !ptr.is_null() {
+                    return ptr
+                }
+            } else {
+                return align as *mut u8
+            }
+        }
+    }
+    std::process::abort();
 }
+
+// #[no_mangle]
+// pub extern "C" fn caco() -> i32 {
+//     return 2
+// }
 
 #[no_mangle]
-pub extern fn deallocate(pointer: *mut c_void, capacity: usize) {
-    unsafe {
-        let _ = Vec::from_raw_parts(pointer, 0, capacity);
+pub unsafe extern fn deallocate(ptr: *mut u8, capacity: usize) -> i32 {
+    if capacity == 0 {
+        return 0
     }
+    let align = mem::align_of::<usize>();
+    let layout = Layout::from_size_align_unchecked(capacity, align);
+    dealloc(ptr, layout);
+    1
 }
 
-#[global_allocator]
-static ALLOC: wee_alloc::WeeAlloc = wee_alloc::WeeAlloc::INIT;
+// #[global_allocator]
+// static ALLOC: wee_alloc::WeeAlloc = wee_alloc::WeeAlloc::INIT;
 
 #[no_mangle]
 fn compare(first: *const c_char, second: *const c_char) -> *const c_char {
