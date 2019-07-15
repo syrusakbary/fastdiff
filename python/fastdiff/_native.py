@@ -1,5 +1,5 @@
-import os
 from wasmer import Instance
+import os
 
 __dir__ = os.path.dirname(os.path.realpath(__file__))
 wasm_file_location = os.path.join(__dir__, "fastdiff.wasm")
