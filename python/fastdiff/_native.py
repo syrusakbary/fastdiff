@@ -61,13 +61,13 @@ def compare(first, second):
     second_pointer, second_length = allocate_cstr(second, instance)
 
     output_pointer = instance.exports.compare(first_pointer, second_pointer)
-
     output_bytes = bytes(get_cstr(output_pointer, instance))
 
     # Deallocate
-    instance.exports.deallocate(first_pointer, first_length)
-    instance.exports.deallocate(second_pointer, second_length)
-    instance.exports.deallocate(output_pointer, len(output_bytes))
+    deallocate = instance.exports.deallocate
+    deallocate(first_pointer, first_length)
+    deallocate(second_pointer, second_length)
+    deallocate(output_pointer, len(output_bytes))
 
     return output_bytes.decode().splitlines()
 
