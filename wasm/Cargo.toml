@@ -13,4 +13,3 @@ opt-level = 's'
 
 [dependencies]
 difflib = "0.4.0"
-wee_alloc = "0.4.4"
