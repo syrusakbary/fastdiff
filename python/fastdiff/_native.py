@@ -42,15 +42,13 @@ def get_cstr(pointer, instance):
     memory = instance.memory.uint8_view(pointer)
     memory_length = len(memory)
     nth = 0
-    # for byte in memory:
-    #     byte = memory[nth]
-    #     if byte == 0:
-    #         break
-    #     yield byte
+
     while nth < memory_length:
         byte = memory[nth]
+
         if byte == 0:
             break
+
         yield byte
         nth += 1
 
