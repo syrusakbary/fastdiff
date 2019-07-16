@@ -1,4 +1,3 @@
-
 build:
 	cargo build --manifest-path wasm/Cargo.toml --release --target=wasm32-unknown-unknown
 	cp wasm/target/wasm32-unknown-unknown/release/fastdiff.wasm fastdiff.wasm
@@ -8,7 +7,7 @@ optimize:
 	wasm-opt -O3 fastdiff.wasm -o fastdiff.wasm
 
 test_python: python
-	cd python && pytest -s --benchmark-skip
+	cd python && make install && pytest -v -s --benchmark-skip
 
 test: test_python
 
