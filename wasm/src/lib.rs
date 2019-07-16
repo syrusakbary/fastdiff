@@ -16,12 +16,10 @@ pub extern "C" fn allocate(size: usize) -> *mut c_void {
 }
 
 #[no_mangle]
-pub extern "C" fn deallocate(ptr: *mut u8, capacity: usize) -> i32 {
+pub extern "C" fn deallocate(ptr: *mut u8, capacity: usize) {
     unsafe {
         let _ = Vec::from_raw_parts(ptr, 0, capacity);
     }
-
-    1
 }
 
 #[no_mangle]

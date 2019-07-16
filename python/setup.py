@@ -13,9 +13,9 @@ with open('HISTORY.rst') as history_file:
 
 requirements = [
     # wasmer, if we are in Linux x86_64
-    'wasmer; python_version>="3.5" and platform_machine=="x86_64" and sys_platform=="linux"',
+    'wasmer>=0.3.0; python_version>="3.5" and platform_machine=="x86_64" and sys_platform=="linux"',
     # wasmer, if we are in macOS x86_64
-    'wasmer; python_version>="3.5" and platform_machine=="x86_64" and sys_platform=="darwin"'
+    'wasmer>=0.3.0; python_version>="3.5" and platform_machine=="x86_64" and sys_platform=="darwin"'
 ]
 
 setup_requirements = ['pytest-runner', ]
