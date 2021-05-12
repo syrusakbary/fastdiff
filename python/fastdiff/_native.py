@@ -1,4 +1,4 @@
-from wasmer import Instance
+from wasmer import Instance, Store, Module
 import os
 
 __dir__ = os.path.dirname(os.path.realpath(__file__))
@@ -8,7 +8,9 @@ wasm_file_location = os.path.join(__dir__, "fastdiff.wasm")
 # Instantiates the module.
 def initiate_instance():
     wasm_bytes = open(wasm_file_location, 'rb').read()
-    instance = Instance(wasm_bytes)
+    store = Store()
+    module = Module(store, wasm_bytes)
+    instance = Instance(module)
     return instance
 
 _instance = None
@@ -27,7 +29,7 @@ def allocate_cstr(string, instance):
     pointer = instance.exports.allocate(length)
 
     # Write the subject into the memory.
-    memory = instance.memory.uint8_view(pointer)
+    memory = instance.exports.memory.uint8_view(pointer)
 
     for nth in range(0, length):
         memory[nth] = subject[nth]
@@ -39,7 +41,7 @@ def allocate_cstr(string, instance):
 
 
 def get_cstr(pointer, instance):
-    memory = instance.memory.uint8_view(pointer)
+    memory = instance.exports.memory.uint8_view(pointer)
     memory_length = len(memory)
     nth = 0
 

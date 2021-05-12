@@ -12,10 +12,8 @@ with open('HISTORY.rst') as history_file:
     history = history_file.read()
 
 requirements = [
-    # wasmer, if we are in Linux x86_64
-    'wasmer>=0.3.0; python_version>="3.5" and platform_machine=="x86_64" and sys_platform=="linux"',
-    # wasmer, if we are in macOS x86_64
-    'wasmer>=0.3.0; python_version>="3.5" and platform_machine=="x86_64" and sys_platform=="darwin"'
+    'wasmer>=1.0.0',
+    'wasmer-compiler-cranelift>=1.0.0'
 ]
 
 setup_requirements = ['pytest-runner', ]
@@ -50,6 +48,6 @@ setup(
     test_suite='tests',
     tests_require=test_requirements,
     url='https://github.com/syrusakbary/fastdiff',
-    version='0.2.0',
+    version='0.3.0',
     zip_safe=False,
 )
