@@ -7,7 +7,10 @@ wasm_file_location = os.path.join(__dir__, "fastdiff.wasm")
 
 # Instantiates the module.
 def initiate_instance():
-    wasm_bytes = open(wasm_file_location, 'rb').read()
+
+    with open(wasm_file_location, 'rb') as fp:
+        wasm_bytes = fp.read()
+
     store = Store()
     module = Module(store, wasm_bytes)
     instance = Instance(module)
